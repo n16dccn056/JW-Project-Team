@@ -1,1 +1,20 @@
 Yêu cầu khi lập trình:
++ Tên biến: viết thường chữ cái đầu, và viết Hoa chữ cái của từ tiếp theo
+ex: hoTen,tuoi,gioiTinh,ngaySinh,....
++ Tên function: tương tự
++ Format code trước khi commit code lên github bằng cách bô đen code và nhấn Crt + Alt + L
++ Tên class và file: viết hoa
+ex: PeopleClass, UserModel,.....
++ Tên hằng viết hoa hết:
+ex: final KEY_CODE = "12312321"
++ Title của commit chứa mẫu thông tin như sau:
+Tên tác vụ - Trạng thái
+ex: Create User Info Screen - finished
+hoặc nếu chưa hoàn thành thì
+Create User Info Screen - unfinished
+
+title như trên mục đích là khi commit lên thì bên Slack nó show thông báo cho dễ hiểu, biết người này làm gì và xong chưa 
+hay còn đang làm
+
++ Điểu quan trọng mà hay mắc lỗi nhất là nhớ chuyển branch phù hợp, nhiều người hay quên chuyển branch
+
