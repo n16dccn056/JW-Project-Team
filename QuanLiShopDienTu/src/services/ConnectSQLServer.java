@@ -16,10 +16,9 @@ import java.sql.Statement;
  */
 public class ConnectSQLServer {
     private static final String DATATABASE_NAME = "QuanLiShopDienTu";
-    private static final String IP = "192.168.40.41";
-    private static final String DB_URL = String.format("jdbc:sqlserver://%s\\SQLEXPRESS:1433;"
+    private static final String DB_URL = String.format("jdbc:sqlserver://localhost:1433;"
             + "databaseName=%s;"
-            + "integratedSecurity=true",IP,DATATABASE_NAME);
+            + "integratedSecurity=true",DATATABASE_NAME);
     private static final String USER_NAME = "sa";
     private static final String PASSWORD = "123456789";
     
