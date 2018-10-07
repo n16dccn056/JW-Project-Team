@@ -16,7 +16,7 @@ import java.sql.Statement;
  */
 public class ConnectSQLServer {
     private static final String DATATABASE_NAME = "QuanLiShopDienTu";
-    private static final String DB_URL = String.format("jdbc:sqlserver://localhost:1433;"
+    private static final String DB_URL = String.format("jdbc:sqlserver://localhost:1443;"
             + "databaseName=%s;"
             + "integratedSecurity=true",DATATABASE_NAME);
     private static final String USER_NAME = "sa";
@@ -31,14 +31,14 @@ public class ConnectSQLServer {
         return connection;
     }
     
-    private static void connect(StateLoginListener stateLogin){
+    public static void connect(StateLoginListener stateLogin){
         connection = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(DB_URL,USER_NAME,PASSWORD);
             stateLogin.onConnectSuccess();
         } catch (Exception ex) {
-            stateLogin.onConnectFailure();
+            stateLogin.onConnectFailure(ex.toString());
         }
     }
 

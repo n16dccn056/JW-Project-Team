@@ -5,8 +5,11 @@
  */
 package main;
 
+import java.sql.Connection;
 import screens.DangNhap;
 import screens.MainApp;
+import services.ConnectSQLServer;
+import services.StateLoginListener;
 
 /**
  *
@@ -39,12 +42,20 @@ public class Main {
             java.util.logging.Logger.getLogger(MainApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        ConnectSQLServer.connect(new StateLoginListener() {
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainApp().setVisible(true);
+            @Override
+            public void onConnectSuccess() {
+                System.out.println("Success connect!");
+            }
+
+            @Override
+            public void onConnectFailure(String error) {
+               System.out.println(error);
             }
         });
+ 
+        /* Create and display the form */
+
     }
 }

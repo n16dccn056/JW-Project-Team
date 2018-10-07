@@ -11,5 +11,5 @@ package services;
  */
 public interface StateLoginListener {
     void onConnectSuccess();
-    void onConnectFailure();
+    void onConnectFailure(String error);
 }
