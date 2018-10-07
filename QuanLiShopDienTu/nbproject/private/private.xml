@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/admin/NetBeansProjects/QuanLiShopDienTu/src/quanlishopdientu/QuanLiShopDienTu.java</file>
+            <file>file:/Users/admin/Documents/GitHub/JW-Project-Team/QuanLiShopDienTu/src/screens/DangNhap.java</file>
+            <file>file:/Users/admin/Documents/GitHub/JW-Project-Team/QuanLiShopDienTu/src/services/Login.java</file>
+            <file>file:/Users/admin/Documents/GitHub/JW-Project-Team/QuanLiShopDienTu/src/screens/MainApp.java</file>
+            <file>file:/Users/admin/Documents/GitHub/JW-Project-Team/QuanLiShopDienTu/src/main/Main.java</file>
+            <file>file:/Users/admin/Documents/GitHub/JW-Project-Team/QuanLiShopDienTu/src/screens/SanPhamTab.java</file>
+            <file>file:/Users/admin/Documents/GitHub/JW-Project-Team/QuanLiShopDienTu/src/services/ConnectSQLServer.java</file>
         </group>
     </open-files>
 </project-private>

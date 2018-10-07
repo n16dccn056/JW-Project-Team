@@ -5,6 +5,11 @@
  */
 package screens;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+import javax.swing.JOptionPane;
+import services.Login;
+import services.Login.StateLogin;
+
 /**
  *
  * @author admin
@@ -15,7 +20,10 @@ public class DangNhap extends javax.swing.JFrame {
      * Creates new form DangNhap
      */
     public DangNhap() {
+        super("Quản lí shop điện tử");
         initComponents();
+
+        initWindows();
     }
 
     /**
@@ -27,21 +35,129 @@ public class DangNhap extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        edtUserName = new javax.swing.JTextField();
+        edtPassword = new javax.swing.JPasswordField();
+        btnLogin = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 48)); // NOI18N
+        jLabel1.setText("Quản lí shop điện tử");
+
+        jLabel2.setText("Tên tài khoản:");
+
+        jLabel3.setText("Mật khẩu:");
+
+        edtUserName.setToolTipText("Tên tài khoản");
+        edtUserName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtUserNameActionPerformed(evt);
+            }
+        });
+
+        edtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtPasswordActionPerformed(evt);
+            }
+        });
+
+        btnLogin.setText("Đăng nhập");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(111, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(edtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(edtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLogin))
+                        .addGap(74, 74, 74)))
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addGap(77, 77, 77)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(edtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addComponent(btnLogin)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void edtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtUserNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtUserNameActionPerformed
+
+    private void edtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtPasswordActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        String userName = edtUserName.getText().trim();
+        String password = edtPassword.getText().toString().trim();
+        if (userName.length()==0 && password.length()==0){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên tài khoản và mật khẩu!","Lỗi nhập liệu!", JOptionPane.ERROR_MESSAGE);
+            edtUserName.requestFocus();
+            return;
+        }
+        if (userName.length()==0){
+            JOptionPane.showMessageDialog(this, "Tên tài khoản không để trống!","Lỗi nhập liệu!", JOptionPane.ERROR_MESSAGE);
+            edtUserName.requestFocus();
+            return;
+        }
+        if (password.length()==0){
+            JOptionPane.showMessageDialog(this, "Chưa nhập mật khẩu!","Lỗi nhập liệu!", JOptionPane.ERROR_MESSAGE);
+            edtPassword.requestFocus();
+            return;
+        }
+        if (password.length()>16){
+            JOptionPane.showMessageDialog(this, "Mật khẩu không vượt quá 16 kí tự!","Lỗi nhập liệu!", JOptionPane.ERROR_MESSAGE);
+            edtPassword.requestFocus();
+            return;
+        }
+        Login login = new Login(userName,password);
+        login.login(new StateLogin() {
+            @Override
+            public void onLoginSuccess() {
+                JOptionPane.showMessageDialog(DangNhap.this, "Đăng nhập thành công!","Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            @Override
+            public void onLoginFailure(String error) {
+                JOptionPane.showMessageDialog(DangNhap.this, "Vui lòng kiểm tra lại tên tài khoản và mật!","Đăng nhập thất bại", JOptionPane.ERROR_MESSAGE);
+
+            }
+        });
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +195,15 @@ public class DangNhap extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JPasswordField edtPassword;
+    private javax.swing.JTextField edtUserName;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
+
+    private void initWindows() {
+        this.setLocationRelativeTo(null);
+    }
 }
