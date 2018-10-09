@@ -35,16 +35,11 @@ public class MainApp extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(mainTabView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(587, Short.MAX_VALUE))
+            .addComponent(mainTabView, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mainTabView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 399, Short.MAX_VALUE))
+            .addComponent(mainTabView, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
 
         pack();
@@ -56,9 +51,12 @@ public class MainApp extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initWindow() {
+        
         mainTabView.add("San pham",new SanPhamTab());
         mainTabView.add("Thanh toan",new ThanhToanTab());
         mainTabView.add("Thong ke",new ThongKeTab());
+        
+        this.setLocationRelativeTo(null);
     }
 
 }
