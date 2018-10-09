@@ -44,7 +44,7 @@ public class GetSanPhamData {
                 
                 conn = ConnectSQLServer.getConnectCurrent();
             } catch (Exception ex) {
-                Logger.getLogger(GetSanPhamData.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GetSanPhamData.cl ass.getName()).log(Level.SEVERE, null, ex);
             }
             if (conn==null){
                 stateGet.onEnd();
