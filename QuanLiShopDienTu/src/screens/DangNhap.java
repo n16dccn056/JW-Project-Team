@@ -15,14 +15,14 @@ import services.Login.StateLogin;
  * @author admin
  */
 public class DangNhap extends javax.swing.JFrame {
-
+    private Login login;
     /**
      * Creates new form DangNhap
      */
     public DangNhap() {
         super("Quản lí shop điện tử");
+        initModels();
         initComponents();
-
         initWindows();
     }
 
@@ -144,19 +144,9 @@ public class DangNhap extends javax.swing.JFrame {
             edtPassword.requestFocus();
             return;
         }
-        Login login = new Login(userName,password);
-        login.login(new StateLogin() {
-            @Override
-            public void onLoginSuccess() {
-                JOptionPane.showMessageDialog(DangNhap.this, "Đăng nhập thành công!","Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            }
-
-            @Override
-            public void onLoginFailure(String error) {
-                JOptionPane.showMessageDialog(DangNhap.this, "Vui lòng kiểm tra lại tên tài khoản và mật!","Đăng nhập thất bại", JOptionPane.ERROR_MESSAGE);
-
-            }
-        });
+        login.setUserName(userName);
+        login.setPassword(password);
+        login.login();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -205,5 +195,31 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void initWindows() {
         this.setLocationRelativeTo(null);
+    }
+
+    private void initModels() {
+        login = new Login();
+        login.setStateLogin(new StateLogin() {
+            @Override
+            public void onStart() {
+                 //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void onEnd() {
+                 //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void onLoginSuccess() {
+                JOptionPane.showMessageDialog(DangNhap.this, "Đăng nhập thành công!","Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            @Override
+            public void onLoginFailure(String error) {
+                JOptionPane.showMessageDialog(DangNhap.this, "Vui lòng kiểm tra lại tên tài khoản và mật!","Đăng nhập thất bại", JOptionPane.ERROR_MESSAGE);
+
+            }
+        });
     }
 }
