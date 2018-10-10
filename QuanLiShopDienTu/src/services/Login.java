@@ -52,8 +52,8 @@ public class Login {
             stateLogin.onStart();
             Connection conn = ConnectSQLServer.getConnectCurrent();
             Statement stmt = conn.createStatement();
-            String query = String.format("select * from STAFF where STAFF_ACCOUNT_NAME = %s"
-                    + " && STAFF_ACCOUNT_PASSWORD = %s", userName,password);
+            String query = String.format("select * from STAFF where STAFF_ACCOUNT_NAME = \'%s\'"
+                    + " AND STAFF_ACCOUNT_PASSWORD = \'%s\'", userName,password);
             // get data from table 'student'
             ResultSet rs = stmt.executeQuery(query);
             // show data
