@@ -58,12 +58,12 @@ public class GetSanPhamData {
             // show data
             while (rs.next()) {
                 SanPham sp = new SanPham();
-                sp.SetID(rs.getInt(0));
-                sp.SetName(rs.getString(1));
-                sp.SetPrice(rs.getInt(2));
-                sp.SetQuantity(rs.getInt(3));
-                sp.SetTradeMarkID(rs.getInt(4));
+                sp.SetID(rs.getInt(1));
+                sp.SetName(rs.getString(2));
+                sp.SetPrice(rs.getInt(3));
+                sp.SetQuantity(rs.getInt(4));
                 sp.SetTypeID(rs.getInt(5));
+                sp.SetTradeMarkID(rs.getInt(6));
                 arrsp.add(sp);
             }
             stateGet.onSuccess(arrsp);
