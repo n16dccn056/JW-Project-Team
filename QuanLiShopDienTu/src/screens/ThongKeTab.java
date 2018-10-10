@@ -209,6 +209,5 @@ public class ThongKeTab extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void initModels() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
