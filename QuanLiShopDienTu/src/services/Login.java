@@ -42,6 +42,9 @@ public class Login {
         this.password = password;
     }
 
+    public Login() {
+    }
+    
     public void login() {
         if (stateLogin==null) return;
         try {
