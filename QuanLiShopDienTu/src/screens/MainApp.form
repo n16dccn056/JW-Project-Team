@@ -23,12 +23,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="mainTabView" alignment="0" pref="646" max="32767" attributes="0"/>
+          <Component id="mainTabView" alignment="0" pref="700" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="mainTabView" alignment="0" pref="420" max="32767" attributes="0"/>
+          <Component id="mainTabView" alignment="0" pref="680" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
