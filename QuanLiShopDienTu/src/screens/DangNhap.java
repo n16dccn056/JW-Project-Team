@@ -14,7 +14,7 @@ import services.Login.StateLogin;
  *
  * @author admin
  */
-public class DangNhap extends javax.swing.JFrame {
+public class DangNhap extends javax.swing.JFrame implements Login.StateLogin{
     private Login login;
     /**
      * Creates new form DangNhap
@@ -82,18 +82,21 @@ public class DangNhap extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(edtUserName)
-                    .addComponent(edtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(edtUserName)
+                            .addComponent(edtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -208,27 +211,31 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void initModels() {
         login = new Login();
-        login.setStateLogin(new StateLogin() {
-            @Override
-            public void onStart() {
-                 //To change body of generated methods, choose Tools | Templates.
-            }
+        login.setStateLogin(this);
+    }
 
-            @Override
-            public void onEnd() {
-                 //To change body of generated methods, choose Tools | Templates.
-            }
+    @Override
+    public void onStart() {
+    }
 
-            @Override
-            public void onLoginSuccess() {
-                JOptionPane.showMessageDialog(DangNhap.this, "Đăng nhập thành công!","Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            }
+    @Override
+    public void onEnd() {
+    }
 
-            @Override
-            public void onLoginFailure(String error) {
-                JOptionPane.showMessageDialog(DangNhap.this, "Vui lòng kiểm tra lại tên tài khoản và mật!","Đăng nhập thất bại", JOptionPane.ERROR_MESSAGE);
-
+    @Override
+    public void onLoginSuccess() {
+        JOptionPane.showMessageDialog(null, "Đăng nhập thành công!","Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        this.setVisible(false);
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainApp().setVisible(true);
             }
         });
+    }
+
+    @Override
+    public void onLoginFailure(String error) {
+        JOptionPane.showMessageDialog(null, "Vui lòng kiểm tra lại tên tài khoản và mật!","Đăng nhập thất bại", JOptionPane.ERROR_MESSAGE);
     }
 }

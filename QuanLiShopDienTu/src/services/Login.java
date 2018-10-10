@@ -5,6 +5,7 @@
  */
 package services;
 
+import common.InforStaff;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -56,7 +57,8 @@ public class Login {
             // get data from table 'student'
             ResultSet rs = stmt.executeQuery(query);
             // show data
-            if (rs.first()){
+            if (rs.next()){
+                InforStaff.idCurrentUser = rs.getInt(1);
                 stateLogin.onLoginSuccess();
             } else {
                 stateLogin.onLoginFailure("Tên tài khoản hoặc mật khẩu sai!!");
