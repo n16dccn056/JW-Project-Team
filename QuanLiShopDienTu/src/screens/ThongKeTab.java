@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.naming.spi.DirStateFactory;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import models.SanPham;
 
 /**
@@ -17,13 +18,15 @@ import models.SanPham;
  * @author admin
  */
 public class ThongKeTab extends javax.swing.JPanel {
+
     GetSanPhamData getsp;
+
     /**
      * Creates new form ThongKe
      */
     public ThongKeTab() {
         initComponents();
-        initModels(); 
+        initModels();
     }
 
     /**
@@ -41,13 +44,13 @@ public class ThongKeTab extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtMaSP = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        OptionSP = new javax.swing.JComboBox<>();
         btnSearch = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        TableTTSP = new javax.swing.JTable();
+        btnShow = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -68,26 +71,24 @@ public class ThongKeTab extends javax.swing.JPanel {
 
         jLabel2.setText("Mã sản phẩm");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Bán chạy", "Tồn kho", "Hết hàng" }));
-
-        jCheckBox2.setText("Tìm kiếm nâng cao");
+        OptionSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Bán chạy", "Tồn kho", "Hết hàng" }));
+        OptionSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OptionSPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCheckBox2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMaSP)))
+                .addContainerGap(97, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(OptionSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -97,11 +98,9 @@ public class ThongKeTab extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(OptionSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         btnSearch.setText("Search");
@@ -111,36 +110,47 @@ public class ThongKeTab extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("THÔNG TIN SẢN PHẨM");
+
+        TableTTSP.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã sản phẩm", "Tên sản phẩm", "Loại", "Số lượng", "Đơn giá"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(TableTTSP);
+
+        btnShow.setText("Show");
+        btnShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowActionPerformed(evt);
+            }
+        });
+
         btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
         });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("THÔNG TIN SẢN PHẨM");
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Loại", "Đơn vị", "Số lượng", "Đơn giá"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -159,9 +169,14 @@ public class ThongKeTab extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1)))
-                        .addComponent(btnSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSearch)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -177,28 +192,26 @@ public class ThongKeTab extends javax.swing.JPanel {
                         .addGap(110, 110, 110)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSearch)
-                            .addComponent(btnExit))))
+                            .addComponent(btnExit))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnShow)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     public ArrayList<SanPham> arrsp;
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         //getsp.GetSanPhamData("SELECT * FROM PRODUCT WHERE PRODUCT_ID+' '+PRODUCT_NAME LIKE "+ '%txtMaSP.getText());
-        if(txtMaSP.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"ban chua nhap ma san pham","loi nhap lieu",JOptionPane.ERROR_MESSAGE);
-            return ;
+        if (txtMaSP.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ban chua nhap ma san pham", "loi nhap lieu", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         getsp.GetSanPhamData("SELECT * FROM PRODUCT WHERE PRODUCT_ID = " + txtMaSP.getText().trim());
-        
-        
-        
-        
-        
-        
-        
-        
+        DefaultTableModel model = (DefaultTableModel) TableTTSP.getModel();
+        model.addRow(new Object[]{arrsp.get(0).GetID(), arrsp.get(0).GetName(), arrsp.get(0).GetTypeID(), arrsp.get(0).GetQuantity(), arrsp.get(0).GetPrice()});
+
+
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -206,49 +219,82 @@ public class ThongKeTab extends javax.swing.JPanel {
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
+        // TODO add your handling code here:
+        String Option = OptionSP.getSelectedItem().toString();
+        switch (Option) {
+            case "All":
+                getsp.GetSanPhamData("SELECT * FROM PRODUCT");
+
+                break;
+            case "Bán chạy":
+                
+        }
+
+
+    }//GEN-LAST:event_btnShowActionPerformed
+
+    private void OptionSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionSPActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_OptionSPActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> OptionSP;
+    private javax.swing.JTable TableTTSP;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnShow;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField txtMaSP;
     // End of variables declaration//GEN-END:variables
 
     private void initModels() {
-         //To change body of generated methods, choose Tools | Templates.
-         getsp = new GetSanPhamData(new GetSanPhamData.IStateGetSanPham() {
-             @Override
-             public void onStart() {
-                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-             }
+        //To change body of generated methods, choose Tools | Templates.
+        getsp = new GetSanPhamData(new GetSanPhamData.IStateGetSanPham() {
+            @Override
+            public void onStart() {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
 
-             @Override
-             public void onEnd() {
-                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-             }
+            @Override
+            public void onEnd() {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
 
-             @Override
-             public void onSuccess(ArrayList<SanPham> arr) {
-                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                 arrsp = new ArrayList();
-                 for(int i=0;i<arr.size();i++){
-                     arrsp.add(arr.get(i));
-                 }
-             }
+            @Override
+            public void onSuccess(ArrayList<SanPham> arr) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                arrsp = new ArrayList();
+                arrsp.addAll(arr);
+                DefaultTableModel model = (DefaultTableModel) TableTTSP.getModel();
+                for (SanPham sp : arrsp) {
+                    model.addRow(createObjectRow(sp));
+                }
+            }
 
-             @Override
-             public void onError(String error) {
-                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-             }
-         });
+            @Override
+            public void onError(String error) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
+
+    private Object[] createObjectRow(SanPham sp) {
+        Object[] result = new Object[]{
+            sp.GetID(),
+            sp.GetName(),
+            sp.GetTypeID(),
+            sp.GetQuantity(),
+            sp.GetPrice()};
+        return result;
+    }
+
 }
