@@ -225,10 +225,19 @@ public class ThongKeTab extends javax.swing.JPanel {
         switch (Option) {
             case "All":
                 getsp.GetSanPhamData("SELECT * FROM PRODUCT");
-
                 break;
             case "Bán chạy":
-                
+                getsp.GetSanPhamData("SELECT SUM(DETAIL_ORDER.PRODUCT_QUANTITY) FROM PRODUCT,DETAIL_ORDER\n"
+                        + "WHERE PRODUCT.PRODUCT_ID = DETAIL_ORDER.PRODUCT_ID \n"
+                        + "GROUP BY PRODUCT_NAME\n"
+                        + "ORDER BY SUM(DETAIL_ORDER.PRODUCT_QUANTITY) DESC");
+                break;
+            case "Tồn kho":
+                getsp.GetSanPhamData("SELECT * FROM PRODUCT WHERE PRODUCT_QUANTITY >= 10 ORDER BY PRODUCT_QUANTITY DESC");
+                break;
+            case "Hết hàng":
+                getsp.GetSanPhamData("SELECT * FROM PRODUCT WHERE PRODUCT_QUUANTITY <= 3 ORDER BY PRODUCT_QUANTITY DESC");
+                break;
         }
 
 
