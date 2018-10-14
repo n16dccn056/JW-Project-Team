@@ -12,38 +12,29 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.LoaiSanPham;
 import models.SanPham;
-import models.Staff;
 import services.ConnectSQLServer;
-
-
 
 
 /**
  *
  * @author admin
  */
-public class GetInforCurrentUser  {
+public class GetPurchaseOrder {
 
-    public GetInforCurrentUser() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public static interface IStateGetCurrentUser {
+    public static interface IStateGetPurchaseOrder {
         void onStart();
         void onEnd();
-        void onSuccess(Staff staff);
+        void onSuccess(int a);
         void onError(String error);
     }
-    private IStateGetCurrentUser stateGet;
+    private IStateGetPurchaseOrder stateGet;
 
-    public GetInforCurrentUser(IStateGetCurrentUser stateGet) {
+    public GetPurchaseOrder(IStateGetPurchaseOrder stateGet) {
         this.stateGet = stateGet;
     }
-    public void getInfoCurrentUser(String query){
-        Staff staff = null;
-       
+    
+    public void getPurchaseOrder(String query){       
         try {
             Connection conn = null;
             try {
@@ -51,7 +42,7 @@ public class GetInforCurrentUser  {
                 
                 conn = ConnectSQLServer.getConnectCurrent();
             } catch (Exception ex) {
-                Logger.getLogger(GetSanPhamData.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GetPurchaseOrder.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (conn==null){
                 stateGet.onEnd();
@@ -63,28 +54,14 @@ public class GetInforCurrentUser  {
             // get data from table 'student'
             ResultSet rs = stmt.executeQuery(query);
             // show data
-            
-            if (rs.next()){
-                staff = new Staff();
-                staff.setId(rs.getInt(1));
-                staff.setName(rs.getNString(2));
-                staff.setAccountName(rs.getString(3));
-                staff.setPassword(rs.getString(4));
-                staff.setAddress(rs.getString(5));
-                staff.setBirthdate(rs.getString(6));
-                staff.setPhoneNumber(rs.getString(7));
-                staff.setGender(rs.getBoolean(8));
-                staff.setCmnd(rs.getString(9));
-                staff.setTypeStaffId(rs.getInt(10));
-                stateGet.onSuccess(staff);
-            } else {
-                stateGet.onError("No user!");
+            int id=0;
+            while(rs.next()){
+                id=rs.getInt(1);
             }
-            
-
+            stateGet.onSuccess(id);
             
         } catch (SQLException ex) {
-            
+            Logger.getLogger(GetPurchaseOrder.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
              stateGet.onEnd();
         }

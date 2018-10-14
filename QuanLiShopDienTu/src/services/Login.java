@@ -59,6 +59,7 @@ public class Login {
             // show data
             if (rs.next()){
                 InforStaff.idCurrentUser = rs.getInt(1);
+                InforStaff.staffname = rs.getNString(2);
                 stateLogin.onLoginSuccess();
             } else {
                 stateLogin.onLoginFailure("Tên tài khoản hoặc mật khẩu sai!!");

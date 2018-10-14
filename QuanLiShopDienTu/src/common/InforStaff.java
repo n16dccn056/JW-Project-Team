@@ -11,4 +11,5 @@ package common;
  */
 public class InforStaff {
     public static int idCurrentUser = -1;
+    public static String staffname = "";
 }
