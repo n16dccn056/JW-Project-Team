@@ -203,13 +203,14 @@ public class ThongKeTab extends javax.swing.JPanel {
     public ArrayList<SanPham> arrsp;
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         //getsp.GetSanPhamData("SELECT * FROM PRODUCT WHERE PRODUCT_ID+' '+PRODUCT_NAME LIKE "+ '%txtMaSP.getText());
+        DefaultTableModel model = (DefaultTableModel) TableTTSP.getModel();
+        model.setRowCount(0);
         if (txtMaSP.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ban chua nhap ma san pham", "loi nhap lieu", JOptionPane.ERROR_MESSAGE);
             return;
         }
         getsp.GetSanPhamData("SELECT * FROM PRODUCT WHERE PRODUCT_ID = " + txtMaSP.getText().trim());
-        DefaultTableModel model = (DefaultTableModel) TableTTSP.getModel();
-        model.addRow(new Object[]{arrsp.get(0).GetID(), arrsp.get(0).GetName(), arrsp.get(0).GetTypeID(), arrsp.get(0).GetQuantity(), arrsp.get(0).GetPrice()});
+        
 
 
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -221,16 +222,16 @@ public class ThongKeTab extends javax.swing.JPanel {
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) TableTTSP.getModel();
+        model.setRowCount(0);
         String Option = OptionSP.getSelectedItem().toString();
         switch (Option) {
             case "All":
                 getsp.GetSanPhamData("SELECT * FROM PRODUCT");
                 break;
             case "Bán chạy":
-                getsp.GetSanPhamData("SELECT SUM(DETAIL_ORDER.PRODUCT_QUANTITY) FROM PRODUCT,DETAIL_ORDER\n"
-                        + "WHERE PRODUCT.PRODUCT_ID = DETAIL_ORDER.PRODUCT_ID \n"
-                        + "GROUP BY PRODUCT_NAME\n"
-                        + "ORDER BY SUM(DETAIL_ORDER.PRODUCT_QUANTITY) DESC");
+                getsp.GetSanPhamData("SELECT TOP 5 PRODUCT.PRODUCT_ID,PRODUCT.PRODUCT_NAME,PRODUCT.PRODUCT_PRICE,PRODUCT.PRODUCT_QUANTITY,PRODUCT.PRODUCT_TYPE_ID, SUM(DETAIL_ORDER.PRODUCT_QUANTITY) FROM PRODUCT,DETAIL_ORDER WHERE PRODUCT.PRODUCT_ID = DETAIL_ORDER.PRODUCT_ID GROUP BY PRODUCT_NAME,PRODUCT.PRODUCT_ID,PRODUCT.PRODUCT_PRICE,PRODUCT.PRODUCT_QUANTITY,PRODUCT.PRODUCT_TYPE_ID ORDER BY SUM(DETAIL_ORDER.PRODUCT_QUANTITY) DESC");
+                                        
                 break;
             case "Tồn kho":
                 getsp.GetSanPhamData("SELECT * FROM PRODUCT WHERE PRODUCT_QUANTITY >= 10 ORDER BY PRODUCT_QUANTITY DESC");
