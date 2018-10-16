@@ -19,8 +19,7 @@ public class Login {
     
     private String userName;
     private String password;
-    private StateLogin stateLogin;
-    
+
     public String getUserName() {
         return userName;
     }
@@ -42,13 +41,8 @@ public class Login {
         this.password = password;
     }
 
-    public Login() {
-    }
-    
-    public void login() {
-        if (stateLogin==null) return;
+    public void login(StateLogin stateLogin) {
         try {
-            stateLogin.onStart();
             Connection conn = ConnectSQLServer.getConnectCurrent();
             Statement stmt = conn.createStatement();
             String query = String.format("select * from STAFF where STAFF_ACCOUNT_NAME = %s"
@@ -61,26 +55,15 @@ public class Login {
             } else {
                 stateLogin.onLoginFailure("Tên tài khoản hoặc mật khẩu sai!!");
             }
+            // close connection
+            conn.close();
         } catch (Exception ex) {
             stateLogin.onLoginFailure(ex.toString());
-        } finally{
-            stateLogin.onEnd();
         }
-        
 }
 
-    public StateLogin getStateLogin() {
-        return stateLogin;
-    }
-
-    public void setStateLogin(StateLogin stateLogin) {
-        this.stateLogin = stateLogin;
-    }
-
 public interface StateLogin {
-    void onStart();
-    void onEnd();
-    
+
     void onLoginSuccess();
 
     void onLoginFailure(String error);

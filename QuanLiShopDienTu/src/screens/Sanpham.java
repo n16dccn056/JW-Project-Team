@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
+package screens;
 
 /**
  *
- * @author admin
+ * @author Ryukendo
  */
-public class Staff {
+class Sanpham {
     
 }

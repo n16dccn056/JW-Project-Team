@@ -11,7 +11,7 @@ package models;
  */
 public class SanPham {
     public String Name;
-    public int ID,Price,Quantity,TypeID,TradeMarkID;
+    public int ID,Price,Quantity,TypeID,TradeMarkID,state;
     
     public void SanPham(){
         
@@ -22,6 +22,14 @@ public class SanPham {
     }
     public int GetID(){
         return this.ID;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
      //Name
     public void SetName(String Name){
@@ -57,6 +65,26 @@ public class SanPham {
     }
     public int GetTradeMarkID(){
         return this.TradeMarkID;
+    }
+
+    public void setDon(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void GetID(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void GetPrice(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void GetTypeID(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void GetQuantity(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
