@@ -5,23 +5,19 @@
  */
 package main;
 
-import java.sql.Connection;
-import screens.DangNhap;
 import screens.MainApp;
 import services.ConnectSQLServer;
 import services.StateLoginListener;
-import data.GetSanPhamData;
+
 /**
  *
  * @author admin
  */
-public class Main{
+public class Main {
 
-   
-        /**
+    /**
      * @param args the command line arguments
      */
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -45,7 +41,7 @@ public class Main{
             java.util.logging.Logger.getLogger(MainApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         ConnectSQLServer.connect(new StateLoginListener() {
 
             @Override
@@ -55,20 +51,17 @@ public class Main{
 
             @Override
             public void onConnectFailure(String error) {
-               System.out.println(error);
+                System.out.println(error);
             }
         });
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainApp().setVisible(true);
             }
         });
         /* Create and display the form */
-        
-        
 
     }
 
-    
 }
