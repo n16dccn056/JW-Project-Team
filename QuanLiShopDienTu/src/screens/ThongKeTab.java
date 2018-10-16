@@ -5,12 +5,14 @@
  */
 package screens;
 
+import data.GetLoaiSanPhamData;
 import data.GetSanPhamData;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.naming.spi.DirStateFactory;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.LoaiSanPham;
 import models.SanPham;
 
 /**
@@ -19,8 +21,9 @@ import models.SanPham;
  */
 public class ThongKeTab extends javax.swing.JPanel {
 
-    GetSanPhamData getsp;
-
+    private GetSanPhamData getsp;
+    private GetLoaiSanPhamData getLSP;
+    private ArrayList<LoaiSanPham> arrLSP;
     /**
      * Creates new form ThongKe
      */
@@ -267,6 +270,26 @@ public class ThongKeTab extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void initModels() {
+        arrLSP = new ArrayList<>();
+        getLSP= new GetLoaiSanPhamData((new GetLoaiSanPhamData.IStateGetLoaiSanPham() {
+            @Override
+            public void onStart() {
+            }
+
+            @Override
+            public void onEnd() {
+            }
+
+            @Override
+            public void onSuccess(ArrayList<LoaiSanPham> arr) {
+                arrLSP.addAll(arr);
+            }
+
+            @Override
+            public void onError(String error) {
+            }
+        }));
+        getLSP.GetLoaiSanPhamData("select  * from PRODUCT_TYPE");
         //To change body of generated methods, choose Tools | Templates.
         getsp = new GetSanPhamData(new GetSanPhamData.IStateGetSanPham() {
             @Override
@@ -295,16 +318,26 @@ public class ThongKeTab extends javax.swing.JPanel {
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
+        getsp.GetSanPhamData("SELECT * FROM PRODUCT");
     }
 
     private Object[] createObjectRow(SanPham sp) {
         Object[] result = new Object[]{
             sp.GetID(),
             sp.GetName(),
-            sp.GetTypeID(),
+            getTenLoaiSanPham(sp.GetTypeID()),
             sp.GetQuantity(),
             sp.GetPrice()};
         return result;
     }
-
+    private String getTenLoaiSanPham(int id){
+        for (LoaiSanPham loaiSanPham : arrLSP) {
+            if (id == loaiSanPham.getID()){
+                return loaiSanPham.getName();
+            }
+            
+        }
+        return "";
+    }
+    
 }
