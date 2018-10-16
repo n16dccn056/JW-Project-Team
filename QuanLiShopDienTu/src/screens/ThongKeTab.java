@@ -5,6 +5,7 @@
  */
 package screens;
 
+import common.Constant;
 import data.GetLoaiSanPhamData;
 import data.GetSanPhamData;
 import java.sql.ResultSet;
@@ -230,17 +231,17 @@ public class ThongKeTab extends javax.swing.JPanel {
         String Option = OptionSP.getSelectedItem().toString();
         switch (Option) {
             case "All":
-                getsp.GetSanPhamData("SELECT * FROM PRODUCT");
+                getsp.GetSanPhamData(Constant.QUERY_SAN_PHAM);
                 break;
             case "Bán chạy":
                 getsp.GetSanPhamData("SELECT TOP 5 PRODUCT.PRODUCT_ID,PRODUCT.PRODUCT_NAME,PRODUCT.PRODUCT_PRICE,PRODUCT.PRODUCT_QUANTITY,PRODUCT.PRODUCT_TYPE_ID, SUM(DETAIL_ORDER.PRODUCT_QUANTITY) FROM PRODUCT,DETAIL_ORDER WHERE PRODUCT.PRODUCT_ID = DETAIL_ORDER.PRODUCT_ID GROUP BY PRODUCT_NAME,PRODUCT.PRODUCT_ID,PRODUCT.PRODUCT_PRICE,PRODUCT.PRODUCT_QUANTITY,PRODUCT.PRODUCT_TYPE_ID ORDER BY SUM(DETAIL_ORDER.PRODUCT_QUANTITY) DESC");
-                                        
+                                    
                 break;
             case "Tồn kho":
-                getsp.GetSanPhamData("SELECT * FROM PRODUCT WHERE PRODUCT_QUANTITY >= 10 ORDER BY PRODUCT_QUANTITY DESC");
+                getsp.GetSanPhamData(Constant.QUERY_TON_KHO);
                 break;
             case "Hết hàng":
-                getsp.GetSanPhamData("SELECT * FROM PRODUCT WHERE PRODUCT_QUUANTITY <= 3 ORDER BY PRODUCT_QUANTITY DESC");
+                getsp.GetSanPhamData(Constant.QUERY_HET_HANG);
                 break;
         }
 
@@ -289,7 +290,7 @@ public class ThongKeTab extends javax.swing.JPanel {
             public void onError(String error) {
             }
         }));
-        getLSP.GetLoaiSanPhamData("select  * from PRODUCT_TYPE");
+        getLSP.GetLoaiSanPhamData(Constant.QUERY_LOAI_SAN_PHAM);
         //To change body of generated methods, choose Tools | Templates.
         getsp = new GetSanPhamData(new GetSanPhamData.IStateGetSanPham() {
             @Override
@@ -318,7 +319,7 @@ public class ThongKeTab extends javax.swing.JPanel {
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
-        getsp.GetSanPhamData("SELECT * FROM PRODUCT");
+        getsp.GetSanPhamData(Constant.QUERY_SAN_PHAM);
     }
 
     private Object[] createObjectRow(SanPham sp) {
