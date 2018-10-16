@@ -11,7 +11,7 @@ package models;
  */
 public class SanPham {
     public String Name;
-    public int ID,Price,Quantity,TypeID,TradeMarkID;
+    public int ID,Price,Quantity,TypeID,TradeMarkID,State;
     
     public void SanPham(){
         
@@ -57,6 +57,13 @@ public class SanPham {
     }
     public int GetTradeMarkID(){
         return this.TradeMarkID;
+    }
+    //State
+    public void SetState(int State){
+        this.State = State;
+    }
+    public int GetState(){
+        return this.State;
     }
     
 }

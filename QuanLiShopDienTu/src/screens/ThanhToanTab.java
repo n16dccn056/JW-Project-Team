@@ -7,6 +7,7 @@ package screens;
 
 import common.InforStaff;
 import data.GetInforCurrentUser;
+import data.GetLoaiSanPhamData;
 import data.GetPurchaseOrder;
 import data.GetSanPhamData;
 import data.SetDetailOrder;
@@ -17,6 +18,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import models.LoaiSanPham;
 import models.SanPham;
 
 /**
@@ -30,6 +32,7 @@ public class ThanhToanTab extends javax.swing.JPanel {
     private SetPurchaseOrder setpurchaseorder;
     private SetDetailOrder setdetailorder;
     private GetPurchaseOrder getpurchaseorder;
+    private GetLoaiSanPhamData getloaisp;
     /**
      * Creates new form ThanhToanTab
      */
@@ -45,6 +48,28 @@ public class ThanhToanTab extends javax.swing.JPanel {
         this.staffid = InforStaff.idCurrentUser;
         lbStaffName.setText(staffname);
         lbStaffId.setText(String.valueOf(staffid));
+        getloaisp = new GetLoaiSanPhamData(new GetLoaiSanPhamData.IStateGetLoaiSanPham() {
+            @Override
+            public void onStart() {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void onEnd() {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void onSuccess(ArrayList<LoaiSanPham> arr) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                loaisp.addAll(arr);
+            }
+
+            @Override
+            public void onError(String error) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
         //order
         getpurchaseorder = new GetPurchaseOrder(new GetPurchaseOrder.IStateGetPurchaseOrder() {
             @Override
@@ -376,6 +401,7 @@ public class ThanhToanTab extends javax.swing.JPanel {
     DefaultTableModel model;
     private int row=0,ThanhTien=0;
     private ArrayList<SanPham> arrsp;
+    private ArrayList<LoaiSanPham> loaisp;
     private int id;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -393,6 +419,13 @@ public class ThanhToanTab extends javax.swing.JPanel {
             str = String.valueOf(arrsp.get(i).GetID());
             if(str.equals(edtMaSanPham.getText())){
                 model = (DefaultTableModel) jTable1.getModel();
+                int sl;
+                sl = Integer.parseInt(spSoLuong.getValue().toString());
+                //kt State
+                if(arrsp.get(i).GetState()==0){
+                        JOptionPane.showMessageDialog(null,"Sản phẩm ngừng kinh doanh","ERROR",JOptionPane.ERROR_MESSAGE);
+                        return;
+                }
                 //kt logic sp
                 for(int j=0;j<model.getRowCount();j++){
                     if(edtMaSanPham.getText().equals(model.getValueAt(j,1).toString())){
@@ -400,9 +433,13 @@ public class ThanhToanTab extends javax.swing.JPanel {
                         return;
                     }
                 }
+                //kt slsp
+                if(sl>arrsp.get(i).GetQuantity()){
+                    String str1 = String.format("So luong san pham trong kho la %s",arrsp.get(i).GetQuantity());
+                    JOptionPane.showMessageDialog(null,str1,"ERROR",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 //add on table
-                int sl;
-                sl = Integer.parseInt(spSoLuong.getValue().toString());
                 row++;
                 ThanhTien +=  sl * arrsp.get(i).GetPrice();
                 model.addRow(new Object[]{row,arrsp.get(i).GetID(),arrsp.get(i).GetName(),"cai",spSoLuong.getValue(),arrsp.get(i).GetPrice(),sl * arrsp.get(i).GetPrice()});

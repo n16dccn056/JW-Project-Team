@@ -64,6 +64,7 @@ public class GetSanPhamData {
                 sp.SetQuantity(rs.getInt(4));
                 sp.SetTypeID(rs.getInt(5));
                 sp.SetTradeMarkID(rs.getInt(6));
+                sp.SetState(rs.getInt(7)); 
                 arrsp.add(sp);
             }
             stateGet.onSuccess(arrsp);
