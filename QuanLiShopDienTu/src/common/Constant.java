@@ -10,5 +10,8 @@ package common;
  * @author Admin
  */
 public class Constant {
-    public static final String QUERY_LOAI_SAN_PHAM ="select * from";
-}
+    public static final String QUERY_LOAI_SAN_PHAM ="select * from PRODUCT_TYPE";
+    public static final String QUERY_THUONG_HIEU ="select * from TRADEMARK";
+    public static final String QUERY_SAN_PHAM ="select * from PRODUCT";
+    
+}"select * from TRADEMARK"
