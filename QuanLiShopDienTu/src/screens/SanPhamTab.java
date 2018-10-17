@@ -99,8 +99,7 @@ public class SanPhamTab extends javax.swing.JPanel {
             @Override
             public void onSuccess(SanPham sp) {
                 JOptionPane.showMessageDialog(null, "Thêm sản phẩm thành công ", "Succesfull", JOptionPane.INFORMATION_MESSAGE);
-                arrsp.add(sp);
-                showSanPham();
+                getsp.GetSanPhamData(Constant.QUERY_SAN_PHAM);
             }
 
             @Override
@@ -603,7 +602,7 @@ public class SanPhamTab extends javax.swing.JPanel {
         String loaiSanPham;
         loaiSanPham = getTenLoaiSanPham(sp.GetTypeID());
         thuongHieu = getTenThuongHieu(sp.GetTradeMarkID());
-        v.add((index + 1) + "");
+        v.add(index + "");
         v.add(sp.GetName());
         v.add(sp.GetID() + "");
         v.add(sp.GetPrice() + "");
@@ -622,12 +621,15 @@ public class SanPhamTab extends javax.swing.JPanel {
             model.fireTableRowsUpdated(indexSelected, indexSelected);
             return;
         }
-        String thuongHieu;
-        String loaiSanPham;
-        for (int i = 0; i < arrsp.size(); i++) {
-
-            model.addRow(createVector(indexSelected + 1, arrsp.get(i)));
+        model.getDataVector().removeAllElements();
+        if (model.getRowCount()== 0){
+            for (int i = 0; i < arrsp.size(); i++) {
+                model.addRow(createVector(i + 1, arrsp.get(i)));
+            }
+            return;
         }
+       
+
     }
 
 
