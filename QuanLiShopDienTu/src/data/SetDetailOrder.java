@@ -46,7 +46,7 @@ public class SetDetailOrder {
                 Logger.getLogger(SetDetailOrder.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (conn==null){
-                stateGet.onEnd();
+                stateGet.onEnd() ;
                 stateGet.onError();
                 return;
             }
