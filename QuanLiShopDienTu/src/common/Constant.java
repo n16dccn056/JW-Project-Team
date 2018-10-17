@@ -14,4 +14,4 @@ public class Constant {
     public static final String QUERY_THUONG_HIEU ="select * from TRADEMARK";
     public static final String QUERY_SAN_PHAM ="select * from PRODUCT";
     
-}"select * from TRADEMARK"
+}

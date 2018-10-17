@@ -20,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import static java.util.Collections.list;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -42,7 +43,9 @@ public class SanPhamTab extends javax.swing.JPanel {
     private InsertSanPham insertSanPham;
     private UpdateSanPham updateSanPham;
     private int indexSelected = -1;
-    /***/
+    /**
+     * 
+     */
     private ArrayList<SanPham> arrsp;
     private ArrayList<LoaiSanPham> arrlsp;
     private ArrayList<ThuongHieu> arrth;
@@ -60,6 +63,7 @@ public class SanPhamTab extends javax.swing.JPanel {
 
             @Override
             public void onSuccess(SanPham sp) {
+                System.out.println("Cap nhat thanh cong");
                 JOptionPane.showMessageDialog(null, "Cập nhật sản phẩm thành công ", "Succesfull", JOptionPane.INFORMATION_MESSAGE);
                 int index = -1;
                 for (int i = 0; i < arrsp.size(); i++) {
@@ -157,6 +161,7 @@ public class SanPhamTab extends javax.swing.JPanel {
         });
         getThuongHieu.getThuongHieuData(Constant.QUERY_THUONG_HIEU);
 
+        arrsp = new ArrayList();
         getsp = new GetSanPhamData(new GetSanPhamData.IStateGetSanPham() {
             @Override
             public void onStart() {
@@ -168,7 +173,8 @@ public class SanPhamTab extends javax.swing.JPanel {
 
             @Override
             public void onSuccess(ArrayList<SanPham> arr) {
-                arrsp = new ArrayList();
+                System.out.println(".onSuccess()");
+                arrsp.clear();
                 arrsp.addAll(arr);
                 showSanPham();
             }
@@ -190,13 +196,31 @@ public class SanPhamTab extends javax.swing.JPanel {
         });
     }
 
+    private int getIndexFromLoaiSanPham(int ID) {
+        for (int i = 0; i < arrlsp.size(); i++) {
+            if (arrlsp.get(i).getID() == ID) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private int getIndexFromThuongHieu(int ID) {
+        for (int i = 0; i < arrth.size(); i++) {
+            if (arrth.get(i).getID() == ID) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
     private void showSanPham(int index) {
         SanPham sp = arrsp.get(index);
         txtTenSanPham.setText(sp.GetName());
         txtDonGia.setText(String.valueOf(sp.GetPrice()));
         txtSoLuong.setText(String.valueOf(sp.GetQuantity()));
-        cbLoaiSanPham.setSelectedIndex(sp.GetTypeID() - 1);
-        cbThuongHieu.setSelectedIndex(sp.GetTradeMarkID() - 1);
+        cbLoaiSanPham.setSelectedIndex(getIndexFromLoaiSanPham(sp.GetTypeID()));
+        cbThuongHieu.setSelectedIndex(getIndexFromThuongHieu(sp.GetTradeMarkID()));
 
         if (sp.getState() == 1) {
             rbHoatDong.setSelected(true);
@@ -229,9 +253,7 @@ public class SanPhamTab extends javax.swing.JPanel {
         return "";
     }
 
-    
-     
-  
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -479,13 +501,14 @@ public class SanPhamTab extends javax.swing.JPanel {
         sp.SetName(txtTenSanPham.getText());
         sp.SetPrice(Integer.parseInt(txtDonGia.getText()));
         sp.SetQuantity(Integer.parseInt(txtSoLuong.getText()));
-        sp.SetTypeID(cbLoaiSanPham.getSelectedIndex() + 1);
-        sp.SetTradeMarkID(cbThuongHieu.getSelectedIndex() + 1);
+        sp.SetTypeID(getIdLoaiSanPhamFromCombox());
+        sp.SetTradeMarkID(getIdThuongHieuFromCombox());
         if (rbHoatDong.isSelected()) {
             sp.setState(1);
         } else {
             sp.setState(0);
         }
+        System.out.println("screens.SanPhamTab.btnSuaActionPerformed()");
         updateSanPham.updateSanPham(sp);
 
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -531,17 +554,39 @@ public class SanPhamTab extends javax.swing.JPanel {
         }
         return true;
     }
+
+    private int getIdLoaiSanPhamFromCombox() {
+        for (LoaiSanPham sp : arrlsp) {
+            if (cbLoaiSanPham.getItemAt(cbLoaiSanPham.getSelectedIndex()).equalsIgnoreCase(sp.getName())) {
+                return sp.getID();
+            }
+        }
+        return 1;
+    }
+
+    private int getIdThuongHieuFromCombox() {
+        for (ThuongHieu sp : arrth) {
+            if (cbThuongHieu.getItemAt(cbThuongHieu.getSelectedIndex()).equalsIgnoreCase(sp.getName())) {
+                return sp.getID();
+            }
+        }
+        return 1;
+    }
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         boolean isThem = checkForm();
+        if (indexSelected != -1) {
+            JOptionPane.showMessageDialog(null, "Ban dang sua san pham! khong them duoc", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (!isThem) {
             return;
         }
         SanPham sp = new SanPham();
-        sp.SetName(txtTenSanPham.getText());
-        sp.SetPrice(Integer.parseInt(txtDonGia.getText()));
-        sp.SetQuantity(Integer.parseInt(txtSoLuong.getText()));
-        sp.SetTypeID(cbLoaiSanPham.getSelectedIndex() + 1);
-        sp.SetTradeMarkID(cbThuongHieu.getSelectedIndex() + 1);
+        sp.SetName(txtTenSanPham.getText().trim());
+        sp.SetPrice(Integer.parseInt(txtDonGia.getText().trim()));
+        sp.SetQuantity(Integer.parseInt(txtSoLuong.getText().trim()));
+        sp.SetTypeID(getIdLoaiSanPhamFromCombox());
+        sp.SetTradeMarkID(getIdThuongHieuFromCombox());
         if (rbHoatDong.isSelected()) {
             sp.setState(1);
         } else {
@@ -552,29 +597,37 @@ public class SanPhamTab extends javax.swing.JPanel {
         //them vao table
 
     }//GEN-LAST:event_btnThemActionPerformed
+    private Vector createVector(int index, SanPham sp) {
+        Vector v = new Vector<String>();
+        String thuongHieu;
+        String loaiSanPham;
+        loaiSanPham = getTenLoaiSanPham(sp.GetTypeID());
+        thuongHieu = getTenThuongHieu(sp.GetTradeMarkID());
+        v.add((index + 1) + "");
+        v.add(sp.GetName());
+        v.add(sp.GetID() + "");
+        v.add(sp.GetPrice() + "");
+        v.add(sp.GetQuantity() + "");
+        v.add(loaiSanPham);
+        v.add(thuongHieu);
+        v.add(sp.getState() == 1 ? "Đang bán" : "Ngừng kinh doanh");
+        return v;
+    }
 
     public void showSanPham() {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
 
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        if (model.getRowCount() > 0 && indexSelected != -1) {
+            model.getDataVector().set(indexSelected, createVector(indexSelected + 1, arrsp.get(indexSelected)));
+            model.fireTableRowsUpdated(indexSelected, indexSelected);
+            return;
+        }
         String thuongHieu;
         String loaiSanPham;
         for (int i = 0; i < arrsp.size(); i++) {
-            loaiSanPham = getTenLoaiSanPham(arrsp.get(i).GetTypeID());
-            thuongHieu = getTenThuongHieu(arrsp.get(i).GetTradeMarkID());
-            model.addRow(new Object[]{
-                i + 1,
-                arrsp.get(i).GetName(),
-                arrsp.get(i).GetID(),
-                arrsp.get(i).GetPrice(),
-                arrsp.get(i).GetQuantity(),
-                loaiSanPham,
-                thuongHieu,
-                arrsp.get(i).getState() == 1 ? "Đang bán" : "Ngừng kinh doanh"
-            });
 
+            model.addRow(createVector(indexSelected + 1, arrsp.get(i)));
         }
-        jTable1.setModel(model);
     }
 
 
