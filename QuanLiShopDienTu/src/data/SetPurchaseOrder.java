@@ -5,6 +5,7 @@
  */
 package data;
 
+import common.Constant;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import services.ConnectSQLServer;
+
 
 
 /**
@@ -34,7 +36,7 @@ public class SetPurchaseOrder {
         this.stateGet = stateGet;
     }
     
-    public void setPurchaseOrder(String query){
+    public void setPurchaseOrder(String[] arrstr){
        
         try {
             Connection conn = null;
@@ -51,7 +53,11 @@ public class SetPurchaseOrder {
                 return;
             }
             // set data
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = conn.prepareStatement(Constant.QUERY_SET_PURCHASE_ORDER);
+            pst.setInt(1,Integer.parseInt(arrstr[0]));
+            pst.setInt(2,Integer.parseInt(arrstr[1]));
+            pst.setNString(3,arrstr[2]);
+            pst.setString(4,arrstr[3]);
             pst.executeUpdate();
             stateGet.onSuccess(true);
             

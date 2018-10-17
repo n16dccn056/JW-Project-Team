@@ -1,27 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
-        <file>
-            <url>src/screens/SanPhamTab.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>52</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/admin/Documents/GitHub/JW-Project-Team/QuanLiShopDienTu/src/screens/ThanhToanTab.java</file>
-            <file>file:/C:/Users/admin/Documents/GitHub/JW-Project-Team/QuanLiShopDienTu/src/data/SetPurchaseOrder.java</file>
-=======
-            <file>file:/C:/Users/Ryukendo/Desktop/JW-Project-Team-CreateSanPham/QuanLiShopDienTu/src/data/UpdateSanPham.java</file>
-            <file>file:/C:/Users/Ryukendo/Desktop/JW-Project-Team-CreateSanPham/QuanLiShopDienTu/src/screens/SanPhamTab.java</file>
-            <file>file:/C:/Users/Ryukendo/Desktop/JW-Project-Team-CreateSanPham/QuanLiShopDienTu/src/data/InsertSanPham.java</file>
-            <file>file:/C:/Users/Ryukendo/Desktop/JW-Project-Team-CreateSanPham/QuanLiShopDienTu/src/data/GetLoaiSanPhamData.java</file>
-            <file>file:/C:/Users/Ryukendo/Desktop/JW-Project-Team-CreateSanPham/QuanLiShopDienTu/src/data/GetSanPhamData.java</file>
->>>>>>> origin/ApplyDatabaseToSanPham
+            <file>file:/C:/Users/admin/Documents/GitHub/JW-Project-Team/QuanLiShopDienTu/src/data/UpdateSanPham.java</file>
+            <file>file:/C:/Users/admin/Documents/GitHub/JW-Project-Team/QuanLiShopDienTu/src/main/Main.java</file>
+            <file>file:/C:/Users/admin/Documents/GitHub/JW-Project-Team/QuanLiShopDienTu/src/screens/MainApp.java</file>
         </group>
     </open-files>
 </project-private>
