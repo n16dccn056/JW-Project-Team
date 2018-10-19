@@ -35,7 +35,7 @@ public class MainApp extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainTabView, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(mainTabView, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -52,9 +52,9 @@ public class MainApp extends javax.swing.JFrame {
 
     private void initWindow() {
         
-        mainTabView.add("San pham",new SanPhamTab());
-        mainTabView.add("Thanh toan",new ThanhToanTab());
-        mainTabView.add("Thong ke",new ThongKeTab());
+        mainTabView.add("Sản phẩm",new SanPhamTab());
+        mainTabView.add("Thanh toán",new ThanhToanTab());
+        mainTabView.add("Thống kê",new ThongKeTab());
         
         this.setLocationRelativeTo(null);
     }

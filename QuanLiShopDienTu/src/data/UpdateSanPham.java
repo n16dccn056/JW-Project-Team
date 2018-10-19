@@ -80,13 +80,16 @@ public class UpdateSanPham {
                 boolean  rs =pst.executeUpdate()>0;
                
                 if (rs) {
+                    
                     stateGet.onSuccess(sp);
                 } else {
+                    
                     throw new Exception("Error to update San Pham");
                 }
 
             } catch (Exception e) {
-                //stateGet.onError(e.toString());
+                System.out.println(e.toString());
+                stateGet.onError(e.toString());
             }
 
         } catch (SQLException ex) {
