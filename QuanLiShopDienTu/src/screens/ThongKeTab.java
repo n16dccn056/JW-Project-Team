@@ -221,11 +221,11 @@ public class ThongKeTab extends javax.swing.JPanel {
 
     private void OptionSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_OptionSPItemStateChanged
         // TODO add your handling code here:
-                DefaultTableModel model = (DefaultTableModel) TableTTSP.getModel();
+        DefaultTableModel model = (DefaultTableModel) TableTTSP.getModel();
         model.setRowCount(0);
         String Option = OptionSP.getSelectedItem().toString();
         switch (Option) {
-            case "All":
+            case "Tất cả":
                 getsp.GetSanPhamData(Constant.QUERY_SAN_PHAM);
                 break;
             case "Bán chạy":
@@ -278,6 +278,7 @@ public class ThongKeTab extends javax.swing.JPanel {
             }
         }));
         getLSP.GetLoaiSanPhamData(Constant.QUERY_LOAI_SAN_PHAM);
+        arrsp = new ArrayList();
         //To change body of generated methods, choose Tools | Templates.
         getsp = new GetSanPhamData(new GetSanPhamData.IStateGetSanPham() {
             @Override
@@ -293,7 +294,7 @@ public class ThongKeTab extends javax.swing.JPanel {
             @Override
             public void onSuccess(ArrayList<SanPham> arr) {
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                arrsp = new ArrayList();
+                arrsp.clear();
                 arrsp.addAll(arr);
                 DefaultTableModel model = (DefaultTableModel) TableTTSP.getModel();
                 for (SanPham sp : arrsp) {
