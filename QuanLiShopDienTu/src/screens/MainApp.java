@@ -52,9 +52,9 @@ public class MainApp extends javax.swing.JFrame {
 
     private void initWindow() {
         
-        mainTabView.add("San pham",new SanPhamTab());
-        mainTabView.add("Thanh toan",new ThanhToanTab());
-        mainTabView.add("Thong ke",new ThongKeTab());
+        mainTabView.add("Sản phẩm",new SanPhamTab());
+        mainTabView.add("Thanh toán",new ThanhToanTab());
+        mainTabView.add("Thống kê",new ThongKeTab());
         
         this.setLocationRelativeTo(null);
     }
