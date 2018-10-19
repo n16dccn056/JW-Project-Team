@@ -12,44 +12,48 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.LoaiSanPham;
 import models.SanPham;
+import models.Staff;
 import services.ConnectSQLServer;
+
+
+
 
 /**
  *
  * @author admin
  */
-public class GetSanPhamData {
+public class GetInforCurrentUser  {
 
-    public static interface IStateGetSanPham {
+    public GetInforCurrentUser() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
+    public static interface IStateGetCurrentUser {
         void onStart();
-
         void onEnd();
-
-        void onSuccess(ArrayList<SanPham> arr);
-
+        void onSuccess(Staff staff);
         void onError(String error);
     }
-    private IStateGetSanPham stateGet;
+    private IStateGetCurrentUser stateGet;
 
-    public GetSanPhamData(IStateGetSanPham stateGet) {
+    public GetInforCurrentUser(IStateGetCurrentUser stateGet) {
         this.stateGet = stateGet;
     }
-
-    public void GetSanPhamData(String query) {
-        ArrayList<SanPham> arrsp = new ArrayList();
-
+    public void getInfoCurrentUser(String query){
+        Staff staff = null;
+       
         try {
             Connection conn = null;
             try {
                 stateGet.onStart();
-
+                
                 conn = ConnectSQLServer.getConnectCurrent();
             } catch (Exception ex) {
                 Logger.getLogger(GetSanPhamData.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (conn == null) {
+            if (conn==null){
                 stateGet.onEnd();
                 stateGet.onError("Can not connect to SQLSERVER");
                 return;
@@ -59,25 +63,34 @@ public class GetSanPhamData {
             // get data from table 'student'
             ResultSet rs = stmt.executeQuery(query);
             // show data
-            while (rs.next()) {
-                SanPham sp = new SanPham();
-                sp.SetID(rs.getInt(1));
-                sp.SetName(rs.getString(2));
-                sp.SetPrice(rs.getInt(3));
-                sp.SetQuantity(rs.getInt(4));
-                sp.SetTypeID(rs.getInt(5));
-                sp.SetTradeMarkID(rs.getInt(6));
-                sp.SetState(rs.getInt(7)); 
-                arrsp.add(sp);
+            
+            if (rs.next()){
+                staff = new Staff();
+                staff.setId(rs.getInt(1));
+                staff.setName(rs.getNString(2));
+                staff.setAccountName(rs.getString(3));
+                staff.setPassword(rs.getString(4));
+                staff.setAddress(rs.getString(5));
+                staff.setBirthdate(rs.getString(6));
+                staff.setPhoneNumber(rs.getString(7));
+                staff.setGender(rs.getBoolean(8));
+                staff.setCmnd(rs.getString(9));
+                staff.setTypeStaffId(rs.getInt(10));
+                stateGet.onSuccess(staff);
+            } else {
+                stateGet.onError("No user!");
             }
-            stateGet.onSuccess(arrsp);
+            
 
+            
         } catch (SQLException ex) {
-            Logger.getLogger(GetSanPhamData.class.getName()).log(Level.SEVERE, null, ex);
+            
         } finally {
-            stateGet.onEnd();
+             stateGet.onEnd();
         }
+       
         //stateGet.onSuccess(arr);
     }
-
+    
+     
 }

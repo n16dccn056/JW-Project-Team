@@ -5,9 +5,13 @@
  */
 package main;
 
+import java.sql.Connection;
+import screens.DangNhap;
 import screens.MainApp;
 import services.ConnectSQLServer;
 import services.StateLoginListener;
+import data.GetSanPhamData;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,18 +50,26 @@ public class Main {
 
             @Override
             public void onConnectSuccess() {
-                System.out.println("Success connect!");
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new DangNhap().setVisible(true);
+                    }
+                });
             }
 
             @Override
             public void onConnectFailure(String error) {
-                System.out.println(error);
-            }
-        });
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainApp().setVisible(true);
+                int n = JOptionPane.showConfirmDialog(
+                        null, "Do you wan to reconnect?",
+                        "Error connect server",
+                        JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.YES_OPTION) {
+                    ConnectSQLServer.connect(this);
+                } else if (n == JOptionPane.NO_OPTION) {
+                    System.exit(0);
+                } else {
+                    System.exit(0);
+                }
             }
         });
         /* Create and display the form */

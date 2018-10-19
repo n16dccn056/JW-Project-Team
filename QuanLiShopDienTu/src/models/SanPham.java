@@ -66,5 +66,12 @@ public class SanPham {
     public int GetTradeMarkID(){
         return this.TradeMarkID;
     }
+    //State
+    public void SetState(int state){
+        this.state = state;
+    }
+    public int GetState(){
+        return this.state;
+    }
     
 }
