@@ -5,7 +5,6 @@
  */
 package screens;
 
-import com.sun.xml.internal.ws.util.StringUtils;
 import javax.swing.JOptionPane;
 import services.Login;
 import services.Login.StateLogin;
