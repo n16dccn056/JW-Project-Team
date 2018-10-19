@@ -120,7 +120,7 @@ public class ThanhToanTab extends javax.swing.JPanel {
             @Override
             public void onError() {
             //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                JOptionPane.showMessageDialog(null,"Không thể kết nối tới SERVER !","ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Không thể kết nối tới SERVER !","Lỗi",JOptionPane.ERROR_MESSAGE);
             }
         });
         setdetailorder = new SetDetailOrder(new SetDetailOrder.IStateSetDetailOrder() {
@@ -142,7 +142,7 @@ public class ThanhToanTab extends javax.swing.JPanel {
             @Override
             public void onError() {
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                JOptionPane.showMessageDialog(null,"Không thể kết nối tới SERVER !","ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Không thể kết nối tới SERVER !","Lỗi",JOptionPane.ERROR_MESSAGE);
             }
         });
         udsp = new UpdateSanPham(new UpdateSanPham.IStateInsertSanPham() {
@@ -399,11 +399,11 @@ public class ThanhToanTab extends javax.swing.JPanel {
         // TODO add your handling code here:
         getSPData.GetSanPhamData(constant.QUERY_SAN_PHAM);
         if(edtMaSanPham.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập hàng hoá !","ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Bạn chưa nhập hàng hoá !","Lỗi",JOptionPane.ERROR_MESSAGE);
             return;
         }
         if(spSoLuong.getValue().hashCode()<1){
-            JOptionPane.showMessageDialog(null,"Bạn chưa nhập số lượng !","ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Bạn chưa nhập số lượng !","Lỗi",JOptionPane.ERROR_MESSAGE);
             return;
         }
         for(int i=0;i<arrsp.size();i++){
@@ -415,7 +415,7 @@ public class ThanhToanTab extends javax.swing.JPanel {
                 sl = Integer.parseInt(spSoLuong.getValue().toString());
                 //kt State
                 if(arrsp.get(i).GetState()==0){
-                        JOptionPane.showMessageDialog(null,"Sản phẩm ngừng kinh doanh","ERROR",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Sản phẩm ngừng kinh doanh","Lỗi",JOptionPane.ERROR_MESSAGE);
                         return;
                 }
                 //kt logic sp
@@ -428,7 +428,7 @@ public class ThanhToanTab extends javax.swing.JPanel {
                 //kt slsp
                 if(sl>arrsp.get(i).GetQuantity()){
                     String str1 = String.format("So luong san pham trong kho la %s",arrsp.get(i).GetQuantity());
-                    JOptionPane.showMessageDialog(null,str1,"ERROR",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,str1,"Lỗi",JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 //add on table
@@ -440,7 +440,7 @@ public class ThanhToanTab extends javax.swing.JPanel {
                 
             }
         }
-        JOptionPane.showMessageDialog(null,"Mã sản phẩm không tồn tại !","ERROR",JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null,"Mã sản phẩm không tồn tại !","Lỗi",JOptionPane.ERROR_MESSAGE);
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -453,15 +453,15 @@ public class ThanhToanTab extends javax.swing.JPanel {
         // TODO add your handling code here:
         //check logic
         if(edtTenKH.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Bạn chưa nhập tên khách hàng !","ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập tên khách hàng !","Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if(edtSDT.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Bạn chưa nhập sdt khách hàng !","ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập sdt khách hàng !","Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if(jTable1.getRowCount()<=0){
-            JOptionPane.showMessageDialog(null, "Chưa có dữ liệu !","ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Chưa có dữ liệu !","Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
         // add on database
@@ -546,7 +546,7 @@ public class ThanhToanTab extends javax.swing.JPanel {
 
             @Override
             public void onError(String error) {
-                JOptionPane.showMessageDialog(null,"Không thể kết nối tới SERVER !","ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Không thể kết nối tới SERVER !","Lỗi",JOptionPane.ERROR_MESSAGE);
             }
         });
     }

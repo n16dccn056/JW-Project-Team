@@ -34,36 +34,6 @@
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="edtTenSanPham" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="edtGiaMotSanPham" min="-2" max="-2" attributes="0"/>
-                                  <Component id="edtSoLuong" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="txtTenSanPham" min="-2" pref="182" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnThem" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                                  <Component id="btnXoa" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btnSua" max="32767" attributes="0"/>
-                                  <Component id="btnLamMoi" pref="94" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="txtDonGia" min="-2" pref="182" max="-2" attributes="0"/>
-                          <Component id="txtSoLuong" min="-2" pref="77" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="edtTenSanPham2" min="-2" max="-2" attributes="0"/>
@@ -77,15 +47,46 @@
                               <Component id="cbThuongHieu" pref="122" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="rbHoatDong" pref="78" max="32767" attributes="0"/>
+                              <Component id="rbHoatDong" max="32767" attributes="0"/>
                               <EmptySpace min="47" pref="47" max="-2" attributes="0"/>
                           </Group>
                           <Component id="rbNgungHoatDong" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="359" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="513" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="edtTenSanPham" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="edtGiaMotSanPham" min="-2" max="-2" attributes="0"/>
+                                  <Component id="edtSoLuong" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtSoLuong" min="-2" pref="77" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtTenSanPham" alignment="0" min="-2" pref="182" max="-2" attributes="0"/>
+                                  <Component id="txtDonGia" alignment="0" min="-2" pref="182" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnLamMoi" min="-2" pref="94" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="btnThem" min="-2" pref="94" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Component id="btnSua" min="-2" pref="94" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -107,7 +108,6 @@
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnXoa" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLamMoi" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="edtGiaMotSanPham" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtDonGia" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -247,14 +247,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnXoa">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnSua">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
